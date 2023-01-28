@@ -1,5 +1,5 @@
 # onion-vanity
-Onion vanity link generator using mkp224o - Automates the process even more for completely automatic deployment to servers
+Onion vanity link generator using mkp224o - Automates the process even more for completely automatic deployment to servers. Uses systemd services to conrtrol mkp224o
 
 ### Intended Use
 This is intended for installation on dedicated servers. Instead of doing this process many times over, fork this repo, modify the filters.list, and you're good to go.
@@ -49,7 +49,7 @@ To exit the screen, use `CTRL+SHIFT+A+D`
 To reattach the screen, run `screen -ls`, and reattach using `screen -r <PID_NUM>`
  
 ```bash
-bash start.sh
+sudo systemctl start mkp224o
 ```
 
 # Factory Reset
