@@ -1,9 +1,8 @@
 #!/bin/bash
 # Installer
 
-# Is this the first install?
-finstall=`cat data/firstinstall`
-if [ $finstall != "true" ]; then
+# First Installation
+installer() {
     # Install dependencies
     echo "Installing..."
     sudo apt install git screen gcc libc6-dev libsodium-dev make autoconf
@@ -13,16 +12,36 @@ if [ $finstall != "true" ]; then
     cd mkp224o-master
     echo "true" > ../data/firstinstall
     bash autogen.sh
-else
+}
+
+# Already installed before
+installed() {
     # Clean make files
     cd mkp224o-master
+    rm -rf ../mkp224o
     make clean
+}
+
+# Is this the first install?
+finstall=data/firstinstall
+if [ -f $finstall ]; then
+    if [ `cat $finstall` != "true" ]; then
+        echo "Determined first install"
+        installer
+    else
+        echo "Determined not first install"
+        installed
+    fi
+else
+    echo "Determined first install"
+    installer
 fi
+
 
 # Make the latest using whatever configuration set in /optimisations.list
 optimisations=`cat ../optimisations.list`
-make
 ./configure $optimisations
+make
 mv -v mkp224o ..
 
 cd ..
