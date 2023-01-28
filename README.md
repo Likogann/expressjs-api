@@ -41,6 +41,11 @@ More important information about starting can be found in `Starting The Applicat
 To start the application after installing, run the following:
 The app will put all found keys in `keys/`
 I would highly recommend mounting an NFS server to `keys/` between all of your servers. This means every server will be outputting keys to `keys/`
+
+The application starts in a [screen](https://linuxize.com/post/how-to-use-linux-screen/)
+To exit the screen, use `CTRL+SHIFT+A+D`
+To reattach the screen, run `screen -ls`, and reattach using `screen -r <PID_NUM>`
+ 
 ```bash
 bash start.sh
 ```
