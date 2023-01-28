@@ -32,7 +32,7 @@ Example: `--enable-donna --enable-intfilter`
 ## Starting installer
 You should run this everytime you clone to a new machine, and everytime you modify optimisations.list
 ```bash
-installer.sh
+bash install.sh
 ```
 From here, the installer will automatically run `start.sh`
 
