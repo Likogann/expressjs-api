@@ -1,0 +1,9 @@
+# mkp224o - we want to install that client side
+mkp224o-master/
+mkp224o
+
+# Don't accidentally push generated keys!
+keys/
+
+# Misc
+data/firstinstall
