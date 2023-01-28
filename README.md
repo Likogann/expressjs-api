@@ -2,7 +2,7 @@
 Onion vanity link generator using mkp224o - Automates the process even more for completely automatic deployment to servers
 
 ### Intended Use
-This is intended for installation on dedicated servers. Instead of doing this process many times over, fork this repo, upload your own filters.list, and you're good to go.
+This is intended for installation on dedicated servers. Instead of doing this process many times over, fork this repo, modify the filters.list, and you're good to go.
 
 # Installing
 How to use this project.
@@ -20,4 +20,24 @@ Edit a file called `filters.list` and add your space seperated filters. Numbers 
 Example: `likogan likodev likogandev`
 ```bash
 nano filters.list
+```
+
+## Creating optimisations.list file
+See [OPTIMISATIONS.TXT](https://github.com/cathugger/mkp224o/blob/master/OPTIMISATION.txt) and find what works best for you.
+
+Put all of the optimisations you want into a file called `optimisations.list`
+Each item should start with a `--` and be space seperated.
+Example: `--enable-donna --enable-intfilter`
+
+## Starting installer
+You should run this everytime you clone to a new machine, and everytime you modify optimisations.list
+```bash
+installer.sh
+```
+From here, the installer will automatically run `start.sh`
+
+# Starting The Application
+To start the application after installing, run the following:
+```bash
+bash start.sh
 ```
