@@ -2,6 +2,6 @@
 # Start
 
 # Start the application using filters.list
-echo "Starting mkp224o"
+echo "Starting mkp224o in a screen"
 filters=`cat filters.list`
-./mkp224o -d keys $filters
+screen ./mkp224o -d keys $filters
