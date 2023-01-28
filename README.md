@@ -41,3 +41,8 @@ To start the application after installing, run the following:
 ```bash
 bash start.sh
 ```
+
+# Factory Reset
+You can reset everything by running `clean.sh`
+This script will remove the mkp224o from the directory, and trick the installer into thinking this is a fresh install.
+Generated keys in `keys/` and `filters.list` will not be modified by this script.
