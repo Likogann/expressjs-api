@@ -8,5 +8,7 @@ filters.list
 # Don't accidentally push generated keys!
 keys/
 
-# Misc
+# Installation/Temp files
 data/firstinstall
+data/mkp224o.service
+start.sh

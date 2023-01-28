@@ -1,0 +1,8 @@
+[Unit]
+Description=mkp224o Script - Located at $startshLocation
+
+[Service]
+ExecStart=bash $startshLocation
+
+[Install]
+WantedBy=multi-user.target

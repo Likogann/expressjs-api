@@ -10,7 +10,9 @@ This has only been tested on Ubuntu 20.04
 
 ## Cloning the repo
 Clone and cd into the github repo
+It's **vital** you do not move the onion-vanity folder otherwise the service won't work. I recommend installing onion-vanity in your home directory `~/onion-vanity`.
 ```bash
+cd ~
 git clone https://github.com/Likogann/onion-vanity onion-vanity
 cd onion-vanity
 ```
