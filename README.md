@@ -35,9 +35,12 @@ You should run this everytime you clone to a new machine, and everytime you modi
 bash install.sh
 ```
 From here, the installer will automatically run `start.sh`
+More important information about starting can be found in `Starting The Application` section
 
 # Starting The Application
 To start the application after installing, run the following:
+The app will put all found keys in `keys/`
+I would highly recommend mounting an NFS server to `keys/` between all of your servers. This means every server will be outputting keys to `keys/`
 ```bash
 bash start.sh
 ```
