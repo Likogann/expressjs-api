@@ -26,9 +26,9 @@ As an example, two translation files are provided. `translations.json` is the de
 You can create as many translation files as you want. **When creating a new translations file, you must modify `app.js` to include it.**
 To do this, we simply have to add a new line to app.js below `let translations = {}`
 ```js
-    let translations = {}
-    translations['en'] = require('./data/translations/translations.json') // English
-    translations['<lang>'] = require('./data/translations/translations.<lang>.json') // Replace <lang> with the two character language name
+let translations = {}
+translations['en'] = require('./data/translations/translations.json') // English
+translations['<lang>'] = require('./data/translations/translations.<lang>.json') // Replace <lang> with the two character language name
 ```
 
 <br>
@@ -46,16 +46,16 @@ It's recommended you use the pre-existing comments, located at the top of the fi
 To modify what the route/middlware does, modify the code between `app.use`.
 In `log.js`, you would want to modify the following:
 ```js
-    // Put your middleware code here
-    // Build the log
-    let date = new Date
-    let DATE_STRING = `${date.toISOString()}`
+// Put your middleware code here
+// Build the log
+let date = new Date
+let DATE_STRING = `${date.toISOString()}`
 
-    // Create log var, and log to console
-    let log = `[${DATE_STRING}] ${req.method} ${req.hostname}${req.originalUrl} | ${req.header('user-agent')}`.grey
-    console.log(log)
+// Create log var, and log to console
+let log = `[${DATE_STRING}] ${req.method} ${req.hostname}${req.originalUrl} | ${req.header('user-agent')}`.grey
+console.log(log)
 
-    next() // Otherwise the middleware won't continue forwards
+next() // Otherwise the middleware won't continue forwards
 ```
 
 <br>
