@@ -1,78 +1,72 @@
-# onion-vanity
-Automatically install mkp224o as a systemd service.
-You can control mkp224o using `systemctl <command> mkp224o`
+# expressjs-api
+An API base for ExpressJS. Fork, or clone to use this as a base for a project.
 
-### Intended Use
-This is intended for installation on dedicated servers. Instead of doing this process many times over, fork this repo, modify the filters.list, and you're good to go.
+## The Basics
+An API base for ExpressJS. This is intended as a base for ExpressJS based APIs.
+### Code Seperation
+This project has different `.js` files for every route, middleware, so on. The app.js file simply searches, and runs other JS files. This makes it really easy to 
+### Environment Variables
+The project is setup with a pre-configured `.env` file. I would *highly* recommend to put the majority of your variables as environment variables, instead of having a `config.json` file, or some alternative. Environment variables are far easier to manage, and integrate into things like Docker.
 
-### Keys
-All generated keys are found in `keys/` directory.
-I would highly recommend making this directory a shared NFS server between all of your servers.
-I personally have `keys/` pointed to an NFS server on my raspberry pi. Then my servers, or other devices running mkp224o will all spit their keys to the same NFS server.
+<br>
 
-# Installation
-Installation is very easy, with just one script.
-This project has been tested on the following operating systems: Ubuntu 20.04, Linux Mint 20.04
+# File Structure
+## api/
+### api/routes/
+This contains the routes of your project. Each route is in a seperate file to split up a huge app.js file, into many smaller files.
+### api/middleware/
+Identical to routes, but handles middleware insead.
 
-## Cloning the repo
-Clone and cd into the github repo
-It's **vital** you do not move the onion-vanity folder otherwise the service won't work. I recommend installing onion-vanity in your home directory `~/onion-vanity`.
-```bash
-cd ~
-git clone https://github.com/Likogann/onion-vanity onion-vanity
-cd onion-vanity
+## data/
+Intented to store data that wouldn't really fit in a database.
+### data/translations/
+Translations contains a list of all translation files.  
+As an example, two translation files are provided. `translations.json` is the default English one. By default, it also comes with `translations.de.json`, a German variant of translations.  
+<br>
+You can create as many translation files as you want. **When creating a new translations file, you must modify `app.js` to include it.**
+To do this, we simply have to add a new line to app.js below `let translations = {}`
+```js
+    let translations = {}
+    translations['en'] = require('./data/translations/translations.json') // English
+    translations['<lang>'] = require('./data/translations/translations.<lang>.json') // Replace <lang> with the two character language name
 ```
 
-## Creating the filters.list file
-Edit a file called `filters.list` and add your space seperated filters. Numbers are not supported in onion links
-Example: `likogan likodev likogandev`
-```bash
-nano filters.list
+<br>
+
+# Creating Routes & Middleware
+Very first, we must find the apropriate directory to place the `.js` files that handle middleware and routes.  
+**For routes:**`api/routes/<file>.js`  
+**For middleware:**`/api/middleware/<file>.js`  
+
+## Creating the .js file
+Clone the existing file in your desired directory. For routes, it will be named `getInfo.js`, for middleware, it's named `log.js`.
+#### Documentation
+It's recommended you use the pre-existing comments, located at the top of the file, to document what this file does. While this is recommended to modify this, it's by no means neccassary. 
+#### Changing the Route/Middlewares Function
+To modify what the route/middlware does, modify the code between `app.use`.
+In `log.js`, you would want to modify the following:
+```js
+    // Put your middleware code here
+    // Build the log
+    let date = new Date
+    let DATE_STRING = `${date.toISOString()}`
+
+    // Create log var, and log to console
+    let log = `[${DATE_STRING}] ${req.method} ${req.hostname}${req.originalUrl} | ${req.header('user-agent')}`.grey
+    console.log(log)
+
+    next() // Otherwise the middleware won't continue forwards
 ```
 
-## Creating optimisations.list file
-See [OPTIMISATIONS.TXT](https://github.com/cathugger/mkp224o/blob/master/OPTIMISATION.txt) and find what works best for you.
+<br>
 
-Put all of the optimisations you want into a file called `optimisations.list`
-Each item should start with a `--` and be space seperated.
-Example: `--enable-donna --enable-intfilter`
-
-## Starting Installer
-The installer is just a bash script.
+# Starting the Server
+To start the server, simply run the `app.js` file using node.
 ```bash
-bash install.sh
+node app.js
 ```
-
-# Managing mkp224o
-This project turns mkp224o into a service. You can manage it using `systemctl`
-
-### Start mkp224o
+### Environment Variables
+If you don't use .env to pass environment variables, you can also do it here.
 ```bash
-systemctl start mkp224o
+API_PORT=4050 NODE_ENV="staging" LOG_LEVEL=1 node app.js
 ```
-
-### Stop mkp224o
-```bash
-systemctl stop mkp224o
-```
-
-### Status mkp224o
-```bash
-systemctl status mkp224o
-```
-
-# Updating Filters / Optmisations & Moving onion-vanity location
-Whenever updating/modifying fitlers or optimisations, you must run the install script again.
-You will have to run install.sh when movning the location of onion-vanity on your disk
-```bash
-bash install.sh
-```
-The install script knows if it's already been run once. It will take much shorter to insall mkp224o.
-
-# Uninstalling / Cleaning / Reseting mkp224o project
-If for, whatever reason, you have to purge your system of mkp224o, you should first run `clean.sh`
-```bash
-clean.sh
-```
-After running this script, it will return onion-vanity to factory settings.
-**This script will not delete found keys, or filters.list**

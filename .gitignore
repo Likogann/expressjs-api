@@ -1,14 +1,1 @@
-# mkp224o - we want to install that client side
-mkp224o-master/
-mkp224o
-
-# Don't share filters.list
-filters.list
-
-# Don't accidentally push generated keys!
-keys/
-
-# Installation/Temp files
-data/firstinstall
-data/mkp224o.service
-start.sh
+node_modules

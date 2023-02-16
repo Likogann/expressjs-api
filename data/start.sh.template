@@ -1,6 +1,0 @@
-#!/bin/bash
-# Start
-
-# Start the application using filters.list
-echo "Starting mkp224o"
-.$homeDir/mkp224o -d $homeDir/keys `cat "$homeDir/filters.list"`
